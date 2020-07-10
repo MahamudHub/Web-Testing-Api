@@ -50,6 +50,7 @@ The POM provides you with methods you could use to call it through the assertion
   ## Built With
  * [Maven](https://maven.apache.org/) - Dependency Management
  * [Junit](https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api/5.6.2) - Dependency
- * [Selenium Java](https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java/3.141.59/) - Dependency 
+ * [Selenium Java](https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java/3.141.59/) - Dependency
+ * [Chrome Driver](https://chromedriver.chromium.org/downloads) - Driver
  
  
