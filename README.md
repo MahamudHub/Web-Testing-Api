@@ -40,9 +40,9 @@ The POM provides you with methods you could use to call it through the assertion
  
  ```java  
    @Test
-    public void openUrlLinks(){
+    public void openUrlLinkTest(){
         String testLink = "http://localhost:9292/";
-        assertEquals(testLink, formPOM.getOpenURL());
+        assertEquals(testLink, formPOM.goToHomePage().getCurrentUrlURL());
         webDriver.quit();
     }
   ```
