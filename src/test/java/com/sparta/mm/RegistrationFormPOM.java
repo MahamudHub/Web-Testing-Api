@@ -12,11 +12,9 @@ import java.util.List;
 
 public class RegistrationFormPOM {
     WebDriver webDriver;
-    WebElement webElement;
     By title = new By.ByClassName("main-content");
     By form = new By.ByClassName("form-control");
     By formGroup = new By.ByClassName("form-group");
-    By submit = new By.ByClassName("btn btn-primary");
     By male = new By.ByCssSelector("div.custom-control:nth-child(6) > label:nth-child(2)");
     By female = new By.ByCssSelector("div.custom-control:nth-child(7) > label:nth-child(2)");
     By terms = new By.ById("terms");
@@ -28,18 +26,19 @@ public class RegistrationFormPOM {
     public RegistrationFormPOM(WebDriver webDriver) {
         this.webDriver = webDriver;
         webDriver.manage().window().maximize();
+        webDriver.get("http://localhost:9292");
     }
 
-    public RegistrationFormPOM goToHomePage(){
+    public RegistrationFormPOM goToHomePage() {
         webDriver.get("http://localhost:9292");
         return this;
     }
 
-    public String getOpenURL() {
+    public String getCurrentUrlURL() {
         return webDriver.getCurrentUrl();
     }
 
-    public boolean isAppTitleCorrect(){
+    public boolean isAppTitleCorrect() {
         String appTitle = webDriver.findElement(title).getText();
         return appTitle.contains("Sparta Global Registration Form");
     }
@@ -53,49 +52,49 @@ public class RegistrationFormPOM {
 
     //--------------------Placeholder--------------------//
 
-    public Boolean isFisrtNamePlaceholderCorrect() {
+    public boolean isFisrtNamePlaceholderCorrect() {
         String firstName = webDriver.findElement(form).getAttribute("placeholder");
         String text = "Enter First Name";
         return firstName.contains(text);
     }
 
-    public Boolean isLastNamePlaceholderCorrect() {
+    public boolean isLastNamePlaceholderCorrect() {
         String lastName = webDriver.findElement(By.id("lastName")).getAttribute("placeholder");
         String text = "Enter Last Name";
         return lastName.contains(text);
     }
 
-    public Boolean isAgePlaceholderCorrect() {
+    public boolean isAgePlaceholderCorrect() {
         String age = webDriver.findElement(By.xpath("/html/body/div/form/div[3]/div/input")).getAttribute("placeholder");
         String text = "Enter Age";
         return age.contains(text);
     }
 
-    public Boolean isDegreePlaceholderCorrect() {
+    public boolean isDegreePlaceholderCorrect() {
         String degree = webDriver.findElement(By.xpath("/html/body/div/form/div[7]/div/input")).getAttribute("placeholder");
         String text = "Enter Degree";
         return degree.contains(text);
     }
 
-    public Boolean isAddressPlaceholderCorrect() {
+    public boolean isAddressPlaceholderCorrect() {
         String address = webDriver.findElement(By.id("inputAddress")).getAttribute("placeholder");
         String text = "1234 Main St";
         return address.contains(text);
     }
 
-    public Boolean isAddressTwoPlaceholderCorrect() {
+    public boolean isAddressTwoPlaceholderCorrect() {
         String address = webDriver.findElement(By.id("inputAddress2")).getAttribute("placeholder");
         String text = "Apartment, studio, or floor";
         return address.contains(text);
     }
 
-    public Boolean isEmailAddressTwoPlaceholderCorrect() {
+    public boolean isEmailAddressTwoPlaceholderCorrect() {
         String emailAddress = webDriver.findElement(By.id("inputemailaddress")).getAttribute("placeholder");
         String text = "name@example.com";
         return emailAddress.contains(text);
     }
 
-    public Boolean islinkedInTwoPlaceholderCorrect() {
+    public boolean islinkedInTwoPlaceholderCorrect() {
         String linkedIn = webDriver.findElement(By.xpath("/html/body/div/form/div[17]/div/input")).getAttribute("placeholder");
         String text = "Enter LinkedIn  url";
         return linkedIn.contains(text);
@@ -135,40 +134,36 @@ public class RegistrationFormPOM {
         return selectObject.toString();
     }
 
-    //--------------------Radio Click--------------------//
-
+    //--------------------Click--------------------//
 
     public String selectGenderMale() {
         webDriver.findElement(male).click();
         return webDriver.findElement(male).getCssValue("color");
     }
+
     public String selectGenderFemale() {
         webDriver.findElement(female).click();
         return webDriver.findElement(female).getCssValue("color");
     }
 
-    public String isTermsClicked(){
+    public String selectTerms() {
         webDriver.findElement(terms).click();
-        webDriver.findElement(signIn).click();
+        //webDriver.findElement(signIn).click();
         return webDriver.findElement(termsSelected).getCssValue("color");
     }
 
-    public String isSDETclicked(){
+    public String selectSDET() {
         webDriver.findElement(SDET).click();
         return webDriver.findElement(SDET).getCssValue("color");
     }
 
-    public String isDevOpsclicked(){
+    public String selectDevOps() {
         webDriver.findElement(DevOps).click();
         return webDriver.findElement(DevOps).getCssValue("color");
     }
 
-    public Color checkIsEmailBoxRed () {
-        WebElement email = webDriver.findElement(By.id("userEmail"));
-        email.sendKeys("Hello");
-        email.submit();
-        Color colourValue = Color.fromString(email.getCssValue("border-color"));
-        return colourValue;
+    public String clickSignIn() {
+        webDriver.findElement(signIn).click();
+        return webDriver.findElement(signIn).getCssValue("color");
     }
-
 }
