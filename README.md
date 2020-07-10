@@ -25,7 +25,7 @@ RubyInstaller is the easiest and most used Ruby environment on Windows.
 bundle
 rackup
 ```
-### Go to http://localhost:9292
+#### Go to http://localhost:9292
 
 ## Running the tests
 
