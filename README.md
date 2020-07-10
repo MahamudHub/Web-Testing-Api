@@ -5,26 +5,6 @@
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Ruby
-
-RubyInstaller is the easiest and most used Ruby environment on Windows.
-
- # https://rubyinstaller.org/
-
-```
-
-### Application set-up
-
-```bash
-bundle
-rackup
-```
 #### Go to http://localhost:9292
 
 ## Running the tests
