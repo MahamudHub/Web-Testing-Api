@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
@@ -12,21 +13,37 @@ import java.util.List;
 public class RegistrationFormPOM {
     WebDriver webDriver;
     WebElement webElement;
+    By title = new By.ByClassName("main-content");
     By form = new By.ByClassName("form-control");
     By formGroup = new By.ByClassName("form-group");
     By submit = new By.ByClassName("btn btn-primary");
-    By clickGender = new By.ByClassName("customRadioInline2");
+    By male = new By.ByCssSelector("div.custom-control:nth-child(6) > label:nth-child(2)");
+    By female = new By.ByCssSelector("div.custom-control:nth-child(7) > label:nth-child(2)");
+    By terms = new By.ById("terms");
+    By termsSelected = new By.ByClassName("form-check-label");
+    By signIn = new By.ByXPath("/html/body/div/form/button");
+    By SDET = new By.ByCssSelector("div.custom-control:nth-child(1) > label:nth-child(2)");
+    By DevOps = new By.ByCssSelector("div.custom-control:nth-child(2) > label:nth-child(2)");
 
     public RegistrationFormPOM(WebDriver webDriver) {
         this.webDriver = webDriver;
         webDriver.manage().window().maximize();
-        webDriver.get("http://localhost:9292/");
     }
 
-    public RegistrationFormPOM getOpenURL() {
-        selectGenderMale();
+    public RegistrationFormPOM goToHomePage(){
+        webDriver.get("http://localhost:9292");
         return this;
     }
+
+    public String getOpenURL() {
+        return webDriver.getCurrentUrl();
+    }
+
+    public boolean isAppTitleCorrect(){
+        String appTitle = webDriver.findElement(title).getText();
+        return appTitle.contains("Sparta Global Registration Form");
+    }
+
 
     public String titleName() {
         String title = webDriver.findElement(By.xpath("form/div[1]/div/label")).toString();
@@ -118,24 +135,40 @@ public class RegistrationFormPOM {
         return selectObject.toString();
     }
 
-    //--------------------Number of choices--------------------//
+    //--------------------Radio Click--------------------//
 
 
-    public void clickSubmit() {
-        webDriver.findElement(submit).click();
-        //Actions actionProvider = new Actions(webDriver);
-       // actionProvider.clickAndHold(searchBtn).build().perform();
+    public String selectGenderMale() {
+        webDriver.findElement(male).click();
+        return webDriver.findElement(male).getCssValue("color");
+    }
+    public String selectGenderFemale() {
+        webDriver.findElement(female).click();
+        return webDriver.findElement(female).getCssValue("color");
     }
 
-    public void selectGenderMale() {
-      webElement =  webDriver.findElement(By.id("customRadioInline1"));
-      webElement.click();
+    public String isTermsClicked(){
+        webDriver.findElement(terms).click();
+        webDriver.findElement(signIn).click();
+        return webDriver.findElement(termsSelected).getCssValue("color");
     }
-    public void selectGenderFemale() {
-        webElement =  webDriver.findElement(clickGender);
-        Actions actions = new Actions(webDriver);
-        actions.clickAndHold(webElement).build().perform();
-        //webElement.click();
+
+    public String isSDETclicked(){
+        webDriver.findElement(SDET).click();
+        return webDriver.findElement(SDET).getCssValue("color");
+    }
+
+    public String isDevOpsclicked(){
+        webDriver.findElement(DevOps).click();
+        return webDriver.findElement(DevOps).getCssValue("color");
+    }
+
+    public Color checkIsEmailBoxRed () {
+        WebElement email = webDriver.findElement(By.id("userEmail"));
+        email.sendKeys("Hello");
+        email.submit();
+        Color colourValue = Color.fromString(email.getCssValue("border-color"));
+        return colourValue;
     }
 
 }
